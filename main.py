@@ -6,11 +6,10 @@ print("Winning Rules of the Rock paper scissor game as follows: \n"
                                 + "Rock vs scissor->Rock wins \n"
                                 +"paper vs scissor->Scissor wins \n")
 CHOICES = ['r', 'p', 's']
-
-opt = {    # changing the keys of the dictionary to lower case to match the `CHOICES`
-    'r': "Rock",
-    's': "Scissors",
-    'p': "Paper"
+opt = {
+    'R': "Rock",
+    'S': "Scissors",
+    'P': "Paper"
 }
 def get_player_choice():
     """Get user input and validate it is one of the choices above"""
@@ -23,8 +22,8 @@ def get_player_choice():
     return player_choice.lower()
 def get_computer_choice():
     """Have the computer pick one of the valid choices at random"""
-    # using random.choice method as stated in the task description
-    computer_choice = random.choice(CHOICES)   
+    computer_choice = random.randint(0, 2)
+    computer_choice = CHOICES[computer_choice]
     return computer_choice
 def is_draw(player_choice, computer_choice):
     """Check if game was a draw"""
@@ -40,17 +39,16 @@ def print_winner(player_choice, computer_choice):
         print('Player wins!')
     else:
         print('Computer wins!')
-        # reformat the winning message
-        print('%s beats %s' % (opt[computer_choice], opt[player_choice]))
+        print('%s beats %s' % (computer_choice, player_choice))
 def play_game():
     """play the game"""
     player_choice = get_player_choice()
     computer_choice = get_computer_choice()
     if is_draw(player_choice, computer_choice):
-        print("It's a tie, both players picked %s: " % CHOICES[player_choice])
+        print("It's a tie, both players picked %s: " % player_choice)
     else:
-        print("CPU: %s" % opt[computer_choice])
-        print("Player: %s" % opt[player_choice])
+        print("CPU: %s" % computer_choice)
+        print("Player: %s" % player_choice)
         print_winner(player_choice, computer_choice)
 if __name__ == "__main__":
     play_game()
